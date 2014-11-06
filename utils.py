@@ -32,7 +32,7 @@ class Buffer(object):
 class MarkovDB(object):
 
     """
-    Stores a 2-d dictionary, called 'self.d', which counts how many times
+    Stores a 2-d dictionary (self.d) which counts how many times
     word pairs have appeared. Probabilities (self.p) are calculated
     after the file is read.
     d = {
@@ -50,13 +50,17 @@ class MarkovDB(object):
     def __init__(self, filename):
         self.d = {}
         self.p = {}
+
         with open(filename) as f:
             b = Buffer()
+
             for word in f.read().split():
                 word = word.lower().strip()
+
                 # If the buffer is 'full' (there are 2 words), then
                 # it contains a tuple we can parse
                 full = b.push(word)
+
                 if (full):
                     w1, w2 = b.contents()
                     self.add(w1, w2)
@@ -98,8 +102,3 @@ class MarkovDB(object):
         for candidate, probability in candidates.items():
             print("{} {} (probability={})".format(
                 word, candidate, probability))
-
-
-if __name__ == '__main__':
-    parser = MarkovDB('input-1.txt')
-    parser.query('jerry')
