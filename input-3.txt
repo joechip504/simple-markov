@@ -1,0 +1,5 @@
+This test case is meant to represent a realistic paragraph one might need to parse
+I am not using any punctuation because that is part of the assignment and instead using new line at the end of each sentence
+The point of this text is only to be read by the computer
+Unique follows the word preceding it and thus should be the only word that follows that word as the word which is followed is only used once
+
