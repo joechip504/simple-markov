@@ -35,10 +35,10 @@ class MarkovDB(object):
     """
     Stores a 2-d dictionary (self.d) which counts how many times
     word pairs have appeared. Probabilities (self.p) are calculated
-    after the file is read.
+    after the file is read, using a similar data structure.
     d = {
         "artificial": {
-                "intelligence": 1,
+                "intelligence": 4,
                 "tree"        : 1,
                 "sweetener"   : 1
             },
