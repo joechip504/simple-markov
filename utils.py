@@ -1,3 +1,4 @@
+import random
 from collections import deque, defaultdict
 
 
@@ -95,10 +96,25 @@ class MarkovDB(object):
     def query(self, word):
         candidates = self.p.get(word.lower())
         if not candidates:
-            print('Fail to find {} in text (probability=0)'.format(word))
+            print('\nFail to find {} in text (probability=0)'.format(word))
             return
 
+        # Use random sampling to generate the next word
+        next_word = self._next(word, candidates)
+        print("\nPossible word pair:")
+        print("{} {} (probability {})\n".format(
+            word, next_word, candidates[next_word]))
+
+        # Now print all possible pairs
         print("All word pairs with probability > 0:")
         for candidate, probability in candidates.items():
             print("{} {} (probability={})".format(
                 word, candidate, probability))
+
+    def _next(self, word, candidates, sample_size=100):
+        sampling = []
+        for candidate, probability in candidates.items():
+            for i in range(int(sample_size * probability)):
+                sampling.append(candidate)
+
+        return random.choice(sampling)
